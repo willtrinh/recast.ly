@@ -24,6 +24,7 @@ class App extends React.Component {
         <div className="row">
           <div className="col-md-7">
             <div><h5><em>videoPlayer</em> view goes here!</h5></div>
+            <VideoPlayer video={exampleVideoData[0]}/>
           </div>
           <div className="col-md-5">
             <div><h5><em>videoList</em> view goes here!</h5></div>
