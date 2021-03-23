@@ -3,15 +3,37 @@ import VideoListEntry from './VideoListEntry.js';
 import VideoPlayer from './VideoPlayer.js';
 import Search from './Search.js';
 import exampleVideoData from '/compiled/src/data/exampleVideoData.js';
+import searchYouTube from '/compiled/src/lib/searchYouTube.js';
 class App extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       videos: [],
-      currentVideo: exampleVideoData[0]
+      currentVideo: null
     };
+
+    this.getYoutubeVideos = this.getYoutubeVideos.bind(this);
   }
+
+
+  componentDidMount() {
+    this.getYoutubeVideos('react js');
+  }
+
+  getYoutubeVideos(query) {
+    var options = {
+      key: this.props.API_KEY,
+      query: query
+    };
+
+    // this.props.searchYouTube(options, (videos) => this.setState({
+    //   videos: videos,
+    //   currentVideo: videos[0]
+    // }));
+  }
+
+
   videoTitleClick(video) {
     this.setState({currentVideo: video});
   }
@@ -22,6 +44,7 @@ class App extends React.Component {
         <nav className="navbar">
           <div className="col-md-6 offset-md-3">
             <div><h5><em>search</em> view goes here</h5></div>
+            {/* <Search getYoutubeVideos={this.getYoutubeVideos} /> */}
           </div>
         </nav>
         <div className="row">
@@ -31,8 +54,7 @@ class App extends React.Component {
           </div>
           <div className="col-md-5">
             <div><h5><em>videoList</em> view goes here!</h5></div>
-            <VideoList videos={exampleVideoData}
-              videoTitleClick={this.videoTitleClick.bind(this)}/>
+            <VideoList videos={this.state.videos} videoTitleClick={this.videoTitleClick.bind(this)}/>
           </div>
         </div>
       </div>
