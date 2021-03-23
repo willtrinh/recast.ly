@@ -7,32 +7,22 @@ import searchYouTube from '/compiled/src/lib/searchYouTube.js';
 class App extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       videos: [],
-      currentVideo: null
+      currentVideo: null,
+      isLoading: true
     };
 
-    this.getYoutubeVideos = this.getYoutubeVideos.bind(this);
-    this.videoTitleClick = this.videoTitleClick.bind(this);
+    this.getYoutubeVideos('shiba inu');
   }
 
   getYoutubeVideos(query) {
-    var options = {
-      query: query,
-      maxResults: 5
-    };
-
-    searchYouTube(options, (videos) => this.setState({
+    searchYouTube(query, (videos) => this.setState({
       videos: videos,
-      currentVideo: videos[0]
+      currentVideo: videos[0],
+      isLoading: false
     }));
   }
-
-  componentDidMount() {
-    this.getYoutubeVideos('cats');
-  }
-
 
   videoTitleClick(video) {
     this.setState({currentVideo: video});
@@ -43,7 +33,7 @@ class App extends React.Component {
       <div>
         <nav className="navbar">
           <div className="col-md-6 offset-md-3">
-            <Search getYoutubeVideos={this.getYoutubeVideos} />
+            <Search getYoutubeVideos={this.getYoutubeVideos.bind(this)} />
           </div>
         </nav>
         <div className="row">
@@ -51,7 +41,7 @@ class App extends React.Component {
             <VideoPlayer video={this.state.currentVideo}/>
           </div>
           <div className="col-md-5">
-            <VideoList videos={this.state.videos} videoTitleClick={this.videoTitleClick}/>
+            <VideoList videos={this.state.videos} videoTitleClick={this.videoTitleClick.bind(this)}/>
           </div>
         </div>
       </div>

@@ -2,14 +2,14 @@ class Search extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      query: ''
+      value: ''
     };
   }
 
   handleSearch(event) {
     this.props.getYoutubeVideos(event.target.value);
     this.setState({
-      query: event.target.value
+      value: event.target.value
     });
   }
 
@@ -17,7 +17,10 @@ class Search extends React.Component {
   render() {
     return (
       <div className="search-bar form-inline">
-        <input className="form-control"type="text" placeholder="Search for videos..." value={this.state.query} onChange={this.handleSearch.bind(this)} />
+        <input className="form-control"type="text"
+          placeholder="Search for videos..."
+          value={this.state.value}
+          onChange={this.handleSearch.bind(this)} />
         <button className="btn hidden-sm-down">
           <span className="glyphicon glyphicon-search"></span>
         </button>
