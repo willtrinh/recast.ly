@@ -3,7 +3,7 @@ import VideoListEntry from './VideoListEntry.js';
 import VideoPlayer from './VideoPlayer.js';
 import Search from './Search.js';
 // import exampleVideoData from '/compiled/src/data/exampleVideoData.js';
-// import searchYouTube from '/compiled/src/lib/searchYouTube.js';
+import searchYouTube from '/compiled/src/lib/searchYouTube.js';
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -14,22 +14,23 @@ class App extends React.Component {
     };
 
     this.getYoutubeVideos = this.getYoutubeVideos.bind(this);
-  }
-
-  componentDidMount() {
-    this.getYoutubeVideos('cats');
+    this.videoTitleClick = this.videoTitleClick.bind(this);
   }
 
   getYoutubeVideos(query) {
     var options = {
-      key: this.props.API_KEY,
-      query: query
+      query: query,
+      maxResults: 5
     };
 
-    // this.props.searchYouTube(options, (videos) => this.setState({
-    //   videos: videos,
-    //   currentVideo: videos[0]
-    // }));
+    searchYouTube(options, (videos) => this.setState({
+      videos: videos,
+      currentVideo: videos[0]
+    }));
+  }
+
+  componentDidMount() {
+    this.getYoutubeVideos('cats');
   }
 
 
@@ -42,18 +43,15 @@ class App extends React.Component {
       <div>
         <nav className="navbar">
           <div className="col-md-6 offset-md-3">
-            <div><h5><em>search</em> view goes here</h5></div>
             <Search getYoutubeVideos={this.getYoutubeVideos} />
           </div>
         </nav>
         <div className="row">
           <div className="col-md-7">
-            <div><h5><em>videoPlayer</em> view goes here!</h5></div>
             <VideoPlayer video={this.state.currentVideo}/>
           </div>
           <div className="col-md-5">
-            <div><h5><em>videoList</em> view goes here!</h5></div>
-            <VideoList videos={this.state.videos} videoTitleClick={this.videoTitleClick.bind(this)}/>
+            <VideoList videos={this.state.videos} videoTitleClick={this.videoTitleClick}/>
           </div>
         </div>
       </div>
