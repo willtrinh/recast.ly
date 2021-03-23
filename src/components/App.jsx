@@ -9,8 +9,11 @@ class App extends React.Component {
 
     this.state = {
       videos: [],
-      video: {}
+      currentVideo: exampleVideoData[0]
     };
+  }
+  videoTitleClick(video) {
+    this.setState({currentVideo: video});
   }
 
   render() {
@@ -24,11 +27,12 @@ class App extends React.Component {
         <div className="row">
           <div className="col-md-7">
             <div><h5><em>videoPlayer</em> view goes here!</h5></div>
-            <VideoPlayer video={exampleVideoData[0]}/>
+            <VideoPlayer video={this.state.currentVideo}/>
           </div>
           <div className="col-md-5">
             <div><h5><em>videoList</em> view goes here!</h5></div>
-            <VideoList videos={exampleVideoData} />
+            <VideoList videos={exampleVideoData}
+              videoTitleClick={this.videoTitleClick.bind(this)}/>
           </div>
         </div>
       </div>
