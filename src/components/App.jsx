@@ -27,10 +27,10 @@ class App extends React.Component {
       query: query
     };
 
-    // this.props.searchYouTube(options, (videos) => this.setState({
-    //   videos: videos,
-    //   currentVideo: videos[0]
-    // }));
+    this.props.searchYouTube(options, (videos) => this.setState({
+      videos: videos,
+      currentVideo: videos[0]
+    }));
   }
 
 
