@@ -10,12 +10,12 @@ $.ajaxPrefilter(function (settings, _, jqXHR) {
 // max - the maximum number of videos to get, which should default to 5
 // key - an authorized YouTube Browser API key
 // only GET embeddable videos
-var searchYouTube = ({query, max = 5, key = YOUTUBE_API_KEY}, callback) => {
+var searchYouTube = ({key = YOUTUBE_API_KEY, query, max = 5}, callback) => {
   $.get('https://www.googleapis.com/youtube/v3/search', {
     part: 'snippet',
+    key: key,
     q: query,
     maxResults: max,
-    key: key,
     type: 'video',
     videoEmbeddable: 'true'
   })
@@ -25,8 +25,8 @@ var searchYouTube = ({query, max = 5, key = YOUTUBE_API_KEY}, callback) => {
         callback(items);
       }
     })
-    .fail(({responseJSON}) => {
-      responseJSON.error.errors.forEach((err) =>
+    .fail(({response}) => {
+      response.error.errors.forEach((err) =>
         console.error(err)
       );
     });

@@ -2,8 +2,8 @@ import VideoList from './VideoList.js';
 import VideoListEntry from './VideoListEntry.js';
 import VideoPlayer from './VideoPlayer.js';
 import Search from './Search.js';
-import exampleVideoData from '/compiled/src/data/exampleVideoData.js';
-import searchYouTube from '/compiled/src/lib/searchYouTube.js';
+// import exampleVideoData from '/compiled/src/data/exampleVideoData.js';
+// import searchYouTube from '/compiled/src/lib/searchYouTube.js';
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -16,9 +16,8 @@ class App extends React.Component {
     this.getYoutubeVideos = this.getYoutubeVideos.bind(this);
   }
 
-
   componentDidMount() {
-    this.getYoutubeVideos('react js');
+    this.getYoutubeVideos('cats');
   }
 
   getYoutubeVideos(query) {
@@ -27,10 +26,10 @@ class App extends React.Component {
       query: query
     };
 
-    this.props.searchYouTube(options, (videos) => this.setState({
-      videos: videos,
-      currentVideo: videos[0]
-    }));
+    // this.props.searchYouTube(options, (videos) => this.setState({
+    //   videos: videos,
+    //   currentVideo: videos[0]
+    // }));
   }
 
 
@@ -44,7 +43,7 @@ class App extends React.Component {
         <nav className="navbar">
           <div className="col-md-6 offset-md-3">
             <div><h5><em>search</em> view goes here</h5></div>
-            {/* <Search getYoutubeVideos={this.getYoutubeVideos} /> */}
+            <Search getYoutubeVideos={this.getYoutubeVideos} />
           </div>
         </nav>
         <div className="row">
