@@ -19,7 +19,7 @@ var searchYouTube = ({key = YOUTUBE_API_KEY, query = 'cats', max = 8}, callback)
     videoEmbeddable: 'true'
   })
     .done(({items}) => {
-      console.log(items);
+      // console.log(items);
       callback(items);
     })
     .fail(({responseJSON}) => {

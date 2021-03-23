@@ -1,5 +1,4 @@
 import VideoListEntry from './VideoListEntry.js';
-// import exampleVideoData from './data/exampleVideoData.js';
 var VideoList = ({videos, videoTitleClick}) => (
   <div className="video-list">
     {videos.map((video) =>
