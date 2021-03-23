@@ -1,3 +1,3 @@
-var YOUTUBE_API_KEY = 'AIzaSyC8RfKCuQ48PI_Hxj7fmHDItuOZSbcjjes';
+var YOUTUBE_API_KEY = 'AIzaSyDXDH9M_RJjGECD5b01x1iMcI1oneqLIME';
 
 export default YOUTUBE_API_KEY;
